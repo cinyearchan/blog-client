@@ -3,7 +3,7 @@
     编辑页面
   </div>
 </template>
-<style src="./template.css">
+<style src="./template.less" lang="less">
 
 </style>
 <script src="./template.js">

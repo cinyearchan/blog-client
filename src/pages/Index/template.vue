@@ -1,22 +1,17 @@
 <template>
   <div id="index">
     <section class="blog-posts">
-      <div class="item">
+      <router-link class="item" v-for="blog in blogs" :to="`/detail/${blog.id}`" :key="blog.id">
         <figure class="avatar">
-          <img src="http://cn.gravatar.com/avatar/1?s=128&d=identicon" alt="">
-          <figcaption>me</figcaption>
+          <img :src="blog.user.avatar" :alt="blog.user.username">
+          <figcaption>{{ blog.user.username }}</figcaption>
         </figure>
-        <h3>前端揭秘 <span>3天前</span></h3>
-        <p>测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本</p>
-      </div>
-      <div class="item">
-        <figure class="avatar">
-          <img src="http://cn.gravatar.com/avatar/1?s=128&d=identicon" alt="">
-          <figcaption>me</figcaption>
-        </figure>
-        <h3>前端揭秘 <span>3天前</span></h3>
-        <p>测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本</p>
-      </div>
+        <h3>{{ blog.title }} <span> {{ blog.createAt }}</span></h3>
+        <p>{{ blog.description }}</p>
+      </router-link>
+    </section>
+    <section class="pagination">
+      <el-pagination layout="prev, pager, next" :current-page="page" :total="total" @current-change="onPageChange"></el-pagination>
     </section>
   </div>
 </template>

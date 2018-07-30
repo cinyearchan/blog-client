@@ -1,26 +1,28 @@
-import request from '@/pages/helpers/request.js'
-import auth from '@/pages/api/auth.js'
-
-window.request = request
-window.auth = auth
+import blog from "@/pages/api/blog.js"
 
 export default {
   data() {
     return {
-      msg: 'welcome to your vue.js app'
+      blogs: [],
+      total: 0,
+      page: 1
     }
   },
+  created() {
+    this.page = parseInt(this.$route.query.page) || 1
+    blog.getIndexBlogs({ page: this.page }).then(res => {
+      this.blogs = res.data
+      this.total = res.total
+      this.page = res.page
+    })
+  },
   methods: {
-    onClick() {
-      this.$message.error('错误提示')
-    },
-
-    onClick2() {
-      this.$alert('这是一段内容', '标题名称', {
-        confirmButtonText: '确定',
-        callback: action => {
-          this.$message.success('点了确定')
-        }
+    onPageChange(newPage) {
+      blog.getIndexBlogs({ page: newPage }).then(res => {
+        this.blogs = res.data
+        this.total = res.total
+        this.page = res.page
+        this.$router.push({ path: '/', query: { page: newPage } })
       })
     }
   }
