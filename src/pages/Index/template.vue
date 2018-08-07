@@ -1,5 +1,5 @@
 <template>
-  <div id="index">
+  <div id="index" v-if="isLogin">
     <section class="blog-posts">
       <router-link class="item" v-for="blog in blogs" :to="`/detail/${blog.id}`" :key="blog.id">
         <figure class="avatar">

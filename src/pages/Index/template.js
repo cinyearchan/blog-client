@@ -1,4 +1,5 @@
 import blog from "@/pages/api/blog.js"
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -7,6 +8,11 @@ export default {
       total: 0,
       page: 1
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isLogin'
+    ])
   },
   created() {
     this.page = parseInt(this.$route.query.page) || 1
